@@ -1,4 +1,5 @@
 use crate::task::Task;
+use std::fmt::Write as _;
 use std::time::{Duration, Instant};
 
 pub struct Metrics {
@@ -77,14 +78,17 @@ impl Metrics {
         self.start_time.elapsed()
     }
 
-    pub fn print(&self) {
-        println!("Total completed: {}", self.total_completed);
+    pub fn render(&self) -> String {
+        let mut report = String::new();
 
-        println!("Avg wait: {:?}", self.average_wait_time());
-        println!("Max wait: {:?}", self.max_wait_time);
-        println!("Avg turnaround: {:?}", self.average_turnaround_time());
-        println!("Peak queue length: {}", self.max_queue_length);
-        println!("Worker utilization: {:.2}%", self.worker_utilization() * 100.0);
-        println!("Makespan: {:?}", self.makespan());
+        let _ = writeln!(&mut report, "Total completed: {}", self.total_completed);
+        let _ = writeln!(&mut report, "Avg wait: {:?}", self.average_wait_time());
+        let _ = writeln!(&mut report, "Max wait: {:?}", self.max_wait_time);
+        let _ = writeln!(&mut report, "Avg turnaround: {:?}", self.average_turnaround_time());
+        let _ = writeln!(&mut report, "Peak queue length: {}", self.max_queue_length);
+        let _ = writeln!(&mut report, "Worker utilization: {:.2}%", self.worker_utilization() * 100.0);
+        let _ = writeln!(&mut report, "Makespan: {:?}", self.makespan());
+
+        report
     }
 }

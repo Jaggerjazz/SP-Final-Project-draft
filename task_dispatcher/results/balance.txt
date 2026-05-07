@@ -1,0 +1,10 @@
+
+=== Balanced workload (50/50 CPU/IO) ===
+Config: tasks=1000, workers=8, cpu_probability=0.50, seed=42
+Total completed: 1000
+Avg wait: 2.048008595s
+Max wait: 4.076074671s
+Avg turnaround: 2.249252608s
+Peak queue length: 1
+Worker utilization: 99.39%
+Makespan: 25.309740466s

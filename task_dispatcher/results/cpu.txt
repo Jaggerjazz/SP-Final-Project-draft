@@ -1,0 +1,10 @@
+
+=== CPU-heavy workload (80/20) ===
+Config: tasks=1000, workers=8, cpu_probability=0.80, seed=99
+Total completed: 1000
+Avg wait: 1.748686566s
+Max wait: 3.467052346s
+Avg turnaround: 1.951130184s
+Peak queue length: 1
+Worker utilization: 99.44%
+Makespan: 25.448117936s

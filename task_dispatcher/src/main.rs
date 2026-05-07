@@ -14,6 +14,7 @@ struct ExperimentSpec {
     cpu_probability: f64,
     seed: u64,
     total_tasks: usize,
+    results_file: &'static str,
 }
 
 fn main() {
@@ -22,6 +23,7 @@ fn main() {
         cpu_probability: 0.5,
         seed: 42,
         total_tasks: 1000,
+        results_file: "results/balance.txt",
     });
 
     run_experiment(ExperimentSpec {
@@ -29,6 +31,7 @@ fn main() {
         cpu_probability: 0.8,
         seed: 99,
         total_tasks: 1000,
+        results_file: "results/cpu.txt",
     });
 }
 
@@ -62,5 +65,6 @@ fn run_experiment(spec: ExperimentSpec) {
     }
 
     let m = metrics.lock().unwrap();
-    monitor::report(spec.name, spec.total_tasks, worker_count, spec.cpu_probability, spec.seed, &m);
+    monitor::report(spec.name, spec.total_tasks, worker_count, spec.cpu_probability, spec.seed, spec.results_file, &m)
+        .expect("failed to write experiment results");
 }
